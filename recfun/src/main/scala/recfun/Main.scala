@@ -13,8 +13,25 @@ object Main {
   /**
    * Exercise 1
    */
-   @annotation.tailrec
     def pascal(c: Int, r: Int): Int = {
+      // tail recursive solution
+      @annotation.tailrec
+      def createRow(r: Int, cur: List[Int] = List(1)) : List[Int] = {
+        // tail recursively creates the r'th row of pascal's triangle
+        val paddedR = 0 +: cur :+ 0
+        val nextR = paddedR.sliding(2).toList.map(_.sum)
+        if (r-1 == 0) nextR 
+        else {
+          val n = r-1
+          createRow(n,nextR)
+        }
+      }
+      if (r == 0) 1 else createRow(r)(c)
+    }
+
+
+    def pascal(c: Int, r: Int): Int = {
+      // naive recursive solution
       if (c == 0 | c == r) 1
       else{
         pascal(r-1,c-1) + pascal(r-1,c)
@@ -47,5 +64,6 @@ object Main {
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int = ???
+    def countChange(money: Int, coins: List[Int]): Int = {
+
   }
