@@ -66,32 +66,36 @@ object Main {
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int = {
-      // naiive recursive function
-      (money, coins) match {
-      case (0,  _)                         => return 1
-      case (m,  _) if m < 0                => return 0
-      case (_,  c) if c.isEmpty            => return 0
-      case (m,  c)                         => countChange(m, c.tail) + 
-                                              countChange(m - c.head,c)
-    }
-  }
 
-    def countChange2(money: Int, coins: List[Int]): Int = {
+    def countChange(money: Int, coins: List[Int]): Int = {
       // memoized version
-      var dict : scala.collection.immutable.Map[List[Any],Int]= Map()
+      var dict : scala.collection.mutable.Map[List[Any],Int]= scala.collection.mutable.Map()
       def changef (money: Int, coins: List[Int],
-                   dict : scala.collection.immutable.Map[List[Any],Int]): Int ={
+                   dict : scala.collection.mutable.Map[List[Any],Int]): Int ={
         val res = (money, coins, dict) match {
           case (m, c, d) if d.contains(List(m,c)) => d(List(m,c))
           case (0, _, _)                          => 1
           case (m, _, _) if m < 0                 => 0
           case (_, c, _) if c.isEmpty             => 0
           case (m, c, d)                          => changef(m, c.tail, d) + 
-                                                      changef(m - c.head,c, d)
+                                                     changef(m - c.head,c, d)
         }
         dict += (List(money,coins) -> res)
         res
       }
       changef(money,coins,dict)
     }
+   
+    def countChange2(money: Int, coins: List[Int]): Int = {
+      // naiive recursive function
+      (money, coins) match {
+        case (0,  _)               => return 1
+        case (m,  _) if m < 0      => return 0
+        case (_,  c) if c.isEmpty  => return 0
+        case (m,  c)               => countChange(m, c.tail) + 
+                                      countChange(m - c.head,c)
+      }
+    }
+
+
+  }
