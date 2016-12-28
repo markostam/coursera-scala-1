@@ -69,7 +69,7 @@ object Main {
 
     def countChange(money: Int, coins: List[Int]): Int = {
       // memoized version
-      var dict : scala.collection.mutable.Map[List[Any],Int]= scala.collection.mutable.Map()
+      lazy val dict : scala.collection.mutable.Map[List[Any],Int]= scala.collection.mutable.Map()
       def changef (money: Int, coins: List[Int],
                    dict : scala.collection.mutable.Map[List[Any],Int]): Int ={
         val res = (money, coins, dict) match {
