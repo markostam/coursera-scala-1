@@ -24,7 +24,7 @@ object FunSets {
    * Returns the union of the two given sets,
    * the sets of all elements that are in either `s` or `t`.
    */
-    def union(s: Set, t: Set): Set = i => s(i) || t(i)
+    def union(s: Set, t: Set): Set = i => s(i) | t(i)
   
   /**
    * Returns the intersection of the two given sets,
@@ -84,7 +84,15 @@ object FunSets {
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
    */
-    def map(s: Set, f: Int => Int): Set = ???
+    def map(s: Set, f: Int => Int): Set = {
+      lazy val emptySet : Set = n => false
+      def iter(a: Int, s: Set): Set = {
+        if (a > bound) s
+        else if (!s(f(a))) union(s, singletonSet(a))
+        else iter(a + 1, s)
+      }
+      iter(-bound, emptySet)
+    }
   
   /**
    * Displays the contents of a set
