@@ -13,7 +13,7 @@ object FunSets {
   /**
    * Indicates whether a set contains a given element.
    */
-  def contains(s: Set, elem: Int): Boolean = s(elem)
+    def contains(s: Set, elem: Int): Boolean = s(elem)
 
   /**
    * Returns the set of the one given element.
@@ -53,18 +53,33 @@ object FunSets {
    */
     def forall(s: Set, p: Int => Boolean): Boolean = {
     def iter(a: Int): Boolean = {
-      if (???) ???
-      else if (???) ???
-      else iter(???)
+      if (a > bound) true
+      else if (s(a) & !p(a)) false
+      else iter(a + 1)
     }
-    iter(???)
+    iter(-bound)
   }
   
   /**
    * Returns whether there exists a bounded integer within `s`
    * that satisfies `p`.
    */
-    def exists(s: Set, p: Int => Boolean): Boolean = ???
+
+    def exists(s: Set, p: Int => Boolean): Boolean = {
+      !forall(s, i => !p(i))
+    }
+
+    // to work out how to write exists using forall, first
+    // write exists as you wrote forall and examine what parts
+    // ned to change to get required outputs
+    def existsPiecewise(s: Set, p: Int => Boolean): Boolean = {
+      def iter(a: Int): Boolean = {
+        if (a > bound) false
+        else if (s(a) & p(a)) true
+        else iter(a + 1)
+      }
+      iter(-bound)
+    }
   
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
