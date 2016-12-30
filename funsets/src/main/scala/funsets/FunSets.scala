@@ -85,10 +85,12 @@ object FunSets {
    * Returns a set transformed by applying `f` to each element of `s`.
    */
     def map(s: Set, f: Int => Int): Set = {
-      lazy val emptySet : Set = n => false
+      val emptySet : Set = i => false
       def iter(a: Int, ns: Set, s: Set): Set = {
         if (a > bound) ns
-        else if (s(a) & !ns(f(a))) union(ns, singletonSet(a))
+        else if (s(a) & !ns(f(a))) {
+          iter(a + 1, union(ns, singletonSet(f(a))), s)
+        }
         else iter(a + 1, ns, s)
       }
       iter(-bound, emptySet, s)
