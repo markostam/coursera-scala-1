@@ -22,4 +22,21 @@
     
     object Hello{...}
     ```
-  wil place the ```Hello``` object into the ```progfun.examples``` package.
+  will place the ```Hello``` object into the ```progfun.examples``` package.
+  + you can then refer to ```Hello``` by it's *fully qualified name* ```progfun.examples.Hello```
+  + for example to run it: ```$ scala progfun.examples.Hello```
+  + then you can also import classes from the same package
+  + Some entities are automatically imported in any scala prog
+    + all members of package ```scala```
+    + all members of ```java.lang```
+    + all members of singleton object ```scala.Predef```
+    + e.g. ```scala.Int```, ```scala.Boolean```, ```java.lang.Object```, ```scala.Predef.require```, ```scala.Predef.asser```, etc...
+  + Standard Scala library at [www.scala-lang.org/api/current](www.scala-lang.org/api/current)
+  ### Traits
+  + in java as well as scala a class can only have one superclasss - *single inheritance*
+  + if a class has several natural supertypes to which it wants to inherit code, you can use a ```trait```
+  + A ```trait``` is declared like an abstract class just with ```trait``` instead of ```abstract class```
+  + ```trait```s can extend unrelated classes arbitrarily
+  + The only thing you can have in a ```class``` that you can't in a ```trait``` and that is *value parameters* e.g. ```Rational(numerator: Int, denominator: Int)```
+  
+  
