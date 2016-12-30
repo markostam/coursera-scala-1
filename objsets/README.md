@@ -48,7 +48,11 @@
   + ```AnyVal``` the base of all primitive types
   + ```Nothing``` is at the bottom of the heirarcy. it's a subtype of every other type.
     + signals abnormal termination
-    + element type of empty collections aka ```List()``` = ```List(Nothing)```
+    + element type of empty collections aka ```List()``` == ```List(Nothing)``` == ```Nil```
     + useful for error checking when you don't need to return anything
   + ```null`` is the subtype of all ```scala.ref``` types. Incompatible with ```AnyVal```
-  
+
+## Polymorphism
+### Type paramaterization
++ classes as well as methods can have types as parameters
++ we explore this by implementing a classic functional data structure known as a cons-list in the [IntList.sc]() worksheet
