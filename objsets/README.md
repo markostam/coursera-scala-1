@@ -39,5 +39,6 @@
 + A ```trait``` is declared like an abstract class just with ```trait``` instead of ```abstract class```
 + ```trait```s can extend unrelated classes arbitrarily
 + The only thing you can have in a ```class``` that you can't in a ```trait``` and that is *value parameters* e.g. ```Rational(numerator: Int, denominator: Int)```
-+ ![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/objsets/img/scala_class_heirarchy.png)
++ Scala Class Heirarchy: 
+![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/objsets/img/scala_class_heirarchy.png)
   
