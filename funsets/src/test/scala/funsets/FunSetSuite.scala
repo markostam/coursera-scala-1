@@ -29,10 +29,10 @@ class FunSetSuite extends FunSuite {
   /**
    * Tests are written using the "test" operator and the "assert" method.
    */
-  // test("string take") {
-  //   val message = "hello, world"
-  //   assert(message.take(5) == "hello")
-  // }
+   test("string take") {
+     val message = "hello, world"
+     assert(message.take(5) == "hello")
+   }
 
   /**
    * For ScalaTest tests, there exists a special equality operator "===" that
@@ -43,10 +43,9 @@ class FunSetSuite extends FunSuite {
    * Try it out! Change the values so that the assertion fails, and look at the
    * error message.
    */
-  // test("adding ints") {
-  //   assert(1 + 2 === 3)
-  // }
-
+   test("adding ints") {
+     assert(1 + 2 === 3)
+   }
 
   import FunSets._
 
@@ -77,6 +76,7 @@ class FunSetSuite extends FunSuite {
     val s1 = singletonSet(1)
     val s2 = singletonSet(2)
     val s3 = singletonSet(3)
+    val s4 = singletonSet(4)
   }
 
   /**
@@ -107,6 +107,18 @@ class FunSetSuite extends FunSuite {
       assert(contains(s, 1), "Union 1")
       assert(contains(s, 2), "Union 2")
       assert(!contains(s, 3), "Union 3")
+    }
+  }
+
+  test("map output works for f : Int => Int = i => i+1"){
+    new TestSets {
+      val s = union(union(s1, s2), s3)
+      //val ss2 = union(union(s2, s3), s4)
+      def f : Int => Int = i => i+1
+      val mapS = map(s,f)
+      assert(contains(mapS, 2), "map 1 -> 2")
+      assert(contains(mapS, 3), "map 2 -> 3")
+      assert(contains(mapS, 4), "map 3 -> 4")
     }
   }
 
