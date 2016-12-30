@@ -39,6 +39,16 @@
 + A ```trait``` is declared like an abstract class just with ```trait``` instead of ```abstract class```
 + ```trait```s can extend unrelated classes arbitrarily
 + The only thing you can have in a ```class``` that you can't in a ```trait``` and that is *value parameters* e.g. ```Rational(numerator: Int, denominator: Int)```
-+ Scala Class Heirarchy: 
-![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/objsets/img/scala_class_heirarchy.png)
++ Scala Class Heirarchy:
+  + basically it forks numeric from non-numeric data types from superclass ```scala.Any``` to ```scala.AnyVal``` for numeric and ```scala.AnyRef``` for other.
+  ![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/objsets/img/scala_class_heirarchy.png)
+  + ```Any```: base type of all types
+    + Methods: ```==```, ```!=```, ```equals```, ```hashCode```, ```toString```
+  + ```AnyRef``` base type of all reference objects, Alias of ```java.lang.Object```
+  + ```AnyVal``` the base of all primitive types
+  + ```Nothing``` is at the bottom of the heirarcy. it's a subtype of every other type.
+    + signals abnormal termination
+    + element type of empty collections aka ```List()``` = ```List(Nothing)```
+    + useful for error checking when you don't need to return anything
+  + ```null`` is the subtype of all ```scala.ref``` types. Incompatible with ```AnyVal```
   
