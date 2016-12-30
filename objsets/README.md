@@ -57,3 +57,26 @@
 ### Type paramaterization
 + classes as well as methods can have types as parameters
 + we explore this by implementing a classic functional data structure known as a cons-list in the [IntList.sc](https://github.com/markostam/coursera-scala-1/blob/master/objsets/src/main/scala/IntList.sc) worksheet
++ cons list = immutable linked list constructed from two building blocks
+  + ```Nil``` the empty list
+  + ```Cons``` a cell containing an element and the remainder of the list
+  + e.g. ```List(1,2,3)``` = ```1 :: (2 :: (3 :: Nil))```
+
+### Type Erasure
++ types are only relevent for the compiler, but not relevant for the execution of the program
++ type parameters do not affect evaluation in Scala
++ we can assume all type params and args are removed before evaluating program
++ other languages that do this include Java, Scala, Haskell, ML, OCaml
++ languages that don't include c++, c#, f#
+
+### Polymorphism
++ in programming it means *a function can be applied to args of many types*
+  + the type can have instances of many types
++ two principle forms:
+  + *subtyping*: isntances of a subclass that can be passed to a base class
+    + pass a ```list``` either a ```Nil``` or a ```Cons```
+    + originally found in imperative languages
+  + *generics*: instances of a function or class created by a type of parametrization.
+    + creates a list of ints or list of doubles or list of list of booleans.
+    + traditionally found in functional languages
+
