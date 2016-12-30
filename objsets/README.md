@@ -17,7 +17,7 @@
 ## How Classes Are Organized
 + Classes and objects are organized in packages
   + to place a class or object inside a package, use a package clause at top of file
-    ++ ```scala
+    ```scala
     package progfun.examples
     
     object Hello{...}```
