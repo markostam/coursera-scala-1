@@ -22,4 +22,4 @@
     
     object Hello{...}
     ```
-
+  wil place the ```Hello``` object into the ```progfun.examples``` package.
