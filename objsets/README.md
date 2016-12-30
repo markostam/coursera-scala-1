@@ -20,5 +20,6 @@
     ```scala
     package progfun.examples
     
-    object Hello{...}```
+    object Hello{...}
+    ```
 
