@@ -1,6 +1,6 @@
 package week3
 
-object intsets_classHeirarchies {
+object IntSets {
   println("welcome to scala worksheet")
   val t1 = new NonEmpty(3, Empty, Empty)
   val t2 = t1.incl(4).incl(5).incl(2)
