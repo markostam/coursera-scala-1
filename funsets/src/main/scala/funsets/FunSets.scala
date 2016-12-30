@@ -36,7 +36,7 @@ object FunSets {
    * Returns the difference of the two given sets,
    * the set of all elements of `s` that are not in `t`.
    */
-    def diff(s: Set, t: Set): Set = i => s(i) ^ t(i)
+    def diff(s: Set, t: Set): Set = i => s(i) & !t(i)
   
   /**
    * Returns the subset of `s` for which `p` holds.
@@ -86,12 +86,12 @@ object FunSets {
    */
     def map(s: Set, f: Int => Int): Set = {
       lazy val emptySet : Set = n => false
-      def iter(a: Int, s: Set): Set = {
-        if (a > bound) s
-        else if (!s(f(a))) union(s, singletonSet(a))
-        else iter(a + 1, s)
+      def iter(a: Int, ns: Set, s: Set): Set = {
+        if (a > bound) ns
+        else if (s(a) & !ns(f(a))) union(ns, singletonSet(a))
+        else iter(a + 1, ns, s)
       }
-      iter(-bound, emptySet)
+      iter(-bound, emptySet, s)
     }
   
   /**
