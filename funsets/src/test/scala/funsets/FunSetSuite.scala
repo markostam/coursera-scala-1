@@ -2,7 +2,6 @@ package funsets
 
 import org.scalatest.FunSuite
 
-
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
@@ -110,17 +109,46 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("intersect only intersection and not original elements") {
+    new TestSets {
+      val s = intersect(union(s1, s2),union(s1, s3))
+      assert(contains(s, 1), "intersect contains 1")
+      assert(!contains(s, 2), "intersect contains 2")
+      assert(!contains(s, 3), "intersect contains 3")
+    }
+  }
+
+  test("diff contains only elements in set1 that are not in set2") {
+    new TestSets {
+      val s = diff(union(s1, s2),union(s1, s3))
+      assert(contains(s, 2), "diff contains 2")
+      assert(!contains(s, 3), "diff doesn't contain 3")
+      assert(!contains(s, 1), "diff doesn't contain 1")
+    }
+  }
+
+  test("filter contains only elements in set1 and that return true from p1 where p1 returns even numbers") {
+    new TestSets {
+      val s = filter(union(union(union(s1, s2), s3), s4),i => if(i%2==0) true else false)
+      assert(contains(s, 2) & contains(s, 4), "filter contains even numbers")
+      assert(!contains(s, 3), "filter doesn't contain 3")
+      assert(!contains(s, 1), "filter doesn't contain 1")
+    }
+  }
+
   test("map output works for f : Int => Int = i => i+1"){
     new TestSets {
-      val s = union(union(s1, s2), s3)
+      val s = union(union(s1, s2),s3)
       //val ss2 = union(union(s2, s3), s4)
       def f : Int => Int = i => i+1
       val mapS = map(s,f)
       assert(contains(mapS, 2), "map 1 -> 2")
       assert(contains(mapS, 3), "map 2 -> 3")
       assert(contains(mapS, 4), "map 3 -> 4")
+      assert(!contains(mapS, 1), "map 1 !-> 1")
     }
   }
 
+  //test
 
 }
