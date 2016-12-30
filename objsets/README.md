@@ -13,3 +13,12 @@
 + **Objects:** When creating a class that will only be used once, we use an ```object``` rather than a ```class``. This creates a *singleton object.* 
   + for an ```object``` we don't need to use ```new``` when instantiating it, just the name of the object itself e.g. ```val a = Obj``` instead of ```val a = new Obj```
 + **Standalone Scala Programs:** It's possible to create standalone scala apps using ```object```'s and the ```main``` function which takes an array of strings ```args: Array[String]``` as its arguments.
+
+## How Classes Are Organized
++ Classes and objects are organized in packages
+  + to place a class or object inside a package, use a package clause at top of file
+    ++ ```scala
+    package progfun.examples
+    
+    object Hello{...}```
+
