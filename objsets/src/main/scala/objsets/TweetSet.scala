@@ -76,11 +76,19 @@ abstract class TweetSet {
    * have the highest retweet count.
    *
    * Hint: the method `remove` on TweetSet will be very useful.
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def descendingByRetweet: TweetList
-  
+  def descendingByRetweet: TweetList = {
+    def descendingByRetweetAcc(acc: TweetList, newSet: TweetSet): TweetList = {
+      if (newSet.isEmpty) acc
+      else {
+        val maxRT: Tweet = newSet.mostRetweeted
+        descendingByRetweetAcc(new Cons(maxRT, acc), newSet.remove(maxRT))
+      }
+    }
+    descendingByRetweetAcc(Nil,this).reverse
+  }
   /**
    * The following methods are already implemented
    */
@@ -118,8 +126,7 @@ class Empty extends TweetSet {
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
   // empty sets will have no most rt'd so we throw exceptions
   def mostRetweeted: Nothing = throw new NoSuchElementException
-  def mostRetweetedAcc(maxSoFar: Tweet): Nothing = throw new NoSuchElementException
-  def descendingByRetweet : Nothing = throw new NoSuchElementException
+  def mostRetweetedAcc(maxSoFar: Tweet): Tweet = maxSoFar
   // it's empty
   def isEmpty: Boolean = true
   /**
@@ -145,20 +152,10 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     val newMax = if (elem.retweets > maxSoFar.retweets) elem else maxSoFar
     right.mostRetweetedAcc(left.mostRetweetedAcc(newMax))
   }
-  def descendingByRetweet: TweetList = {
-    def descendingByRetweetAcc(listSoFar: TweetList, newSet: TweetSet): TweetList = {
-      if (newSet.isEmpty) listSoFar
-      else {
-        val maxRT: Tweet = mostRetweeted
-        descendingByRetweetAcc(new Cons(maxRT, listSoFar), newSet.remove(maxRT))
-      }
-    }
-    descendingByRetweetAcc(Nil,this)
-  }
+
   /**
    * The following methods are already implemented
    */
-
   def contains(x: Tweet): Boolean =
     if (x.text < elem.text) left.contains(x)
     else if (elem.text < x.text) right.contains(x)
@@ -191,6 +188,14 @@ trait TweetList {
       f(head)
       tail.foreach(f)
     }
+  // reverses a TweetList (so we can get descending)
+  def reverse: TweetList = {
+    def reverseAcc(n: TweetList, o: TweetList): TweetList = {
+      if (o.isEmpty) n
+      else reverseAcc(new Cons(o.head, n), o.tail)
+    }
+    reverseAcc(Nil, this)
+  }
 }
 
 object Nil extends TweetList {
