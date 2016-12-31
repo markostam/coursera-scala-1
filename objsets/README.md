@@ -58,7 +58,7 @@
     + signals abnormal termination
     + element type of empty collections aka ```List()``` == ```List(Nothing)``` == ```Nil```
     + useful for error checking when you don't need to return anything
-  + ```null`` is the subtype of all ```scala.ref``` types. Incompatible with ```AnyVal```
+  + ```null``` is the subtype of all ```scala.ref``` types. Incompatible with ```AnyVal```
 
 ## Polymorphism
 ### Type paramaterization
