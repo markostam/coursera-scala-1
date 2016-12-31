@@ -8,7 +8,7 @@
   + it is also possible to *redefine* a non-abstract definition in a sublass by using ```override def```
 
 ### Persistent Data Structures
-+ **Persistent data structures:** When we make changes to a data structure such as a binary tree, we don't mutate it. We simply add another tree in parallel to the one that already existed with the additional data that we wanted to add. Thus the original tree stays put or *persists*.
++ When we make changes to a data structure such as a binary tree, we don't mutate it. We simply add another tree in parallel to the one that already existed with the additional data that we wanted to add. Thus the original tree stays put or *persists*.
 + We implement an immutable binary tree in [IntSets.sc](https://github.com/markostam/coursera-scala-1/blob/master/objsets/src/main/scala/IntSets.sc)
 
 ### Classes vs. Objects
