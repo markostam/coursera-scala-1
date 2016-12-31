@@ -80,14 +80,14 @@ abstract class TweetSet {
    * and be implemented in the subclasses?
    */
   def descendingByRetweet: TweetList = {
-    def descendingByRetweetAcc(acc: TweetList, newSet: TweetSet): TweetList = {
+    def ascendingByRetweetAcc(acc: TweetList, newSet: TweetSet): TweetList = {
       if (newSet.isEmpty) acc
       else {
         val maxRT: Tweet = newSet.mostRetweeted
-        descendingByRetweetAcc(new Cons(maxRT, acc), newSet.remove(maxRT))
+        ascendingByRetweetAcc(new Cons(maxRT, acc), newSet.remove(maxRT))
       }
     }
-    descendingByRetweetAcc(Nil,this).reverse
+    ascendingByRetweetAcc(Nil,this).reverse
   }
   /**
    * The following methods are already implemented
@@ -210,17 +210,17 @@ class Cons(val head: Tweet, val tail: TweetList) extends TweetList {
 
 
 object GoogleVsApple {
-  val google = List("android", "Android", "galaxy", "Galaxy", "nexus", "Nexus")
+  val google : List[String] = List("android", "Android", "galaxy", "Galaxy", "nexus", "Nexus")
   val apple = List("ios", "iOS", "iphone", "iPhone", "ipad", "iPad")
 
-    lazy val googleTweets: TweetSet = ???
-  lazy val appleTweets: TweetSet = ???
-  
+  lazy val googleTweets: TweetSet = allTweets.filter(x => google.exists(x.text.contains))
+  lazy val appleTweets: TweetSet = allTweets.filter(x => apple.exists(x.text.contains))
+
   /**
    * A list of all tweets mentioning a keyword from either apple or google,
    * sorted by the number of retweets.
    */
-     lazy val trending: TweetList = ???
+     lazy val trending: TweetList = googleTweets.union(appleTweets).descendingByRetweet
   }
 
 object Main extends App {
