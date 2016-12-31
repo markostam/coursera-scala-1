@@ -63,11 +63,13 @@ abstract class TweetSet {
    * Calling `mostRetweeted` on an empty set should throw an exception of
    * type `java.util.NoSuchElementException`.
    *
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def mostRetweeted: Tweet = ???
-  
+  def mostRetweeted: Tweet
+
+  def mostRetweetedAcc(maxSoFar: Tweet): Tweet
+
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
    * in descending order. In other words, the head of the resulting list should
@@ -77,7 +79,7 @@ abstract class TweetSet {
    * Question: Should we implment this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def descendingByRetweet: TweetList = ???
+  def descendingByRetweet: TweetList
   
   /**
    * The following methods are already implemented
@@ -91,6 +93,10 @@ abstract class TweetSet {
    */
   def incl(tweet: Tweet): TweetSet
 
+  /**
+    * Returns a true if empty, false if not
+    */
+  def isEmpty: Boolean
   /**
    * Returns a new `TweetSet` which excludes `tweet`.
    */
@@ -110,6 +116,12 @@ abstract class TweetSet {
 class Empty extends TweetSet {
 
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
+  // empty sets will have no most rt'd so we throw exceptions
+  def mostRetweeted: Nothing = throw new NoSuchElementException
+  def mostRetweetedAcc(maxSoFar: Tweet): Nothing = throw new NoSuchElementException
+  def descendingByRetweet : Nothing = throw new NoSuchElementException
+  // it's empty
+  def isEmpty: Boolean = true
   /**
    * The following methods are already implemented
    */
@@ -125,7 +137,24 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       if (p(elem)) left.filterAcc(p, right.filterAcc(p, acc.incl(elem)))
       else left.filterAcc(p, right.filterAcc(p, acc))
     }
+  // it's not empty
+  def isEmpty: Boolean = false
 
+  def mostRetweeted: Tweet = mostRetweetedAcc(elem)
+  def mostRetweetedAcc(maxSoFar: Tweet): Tweet = {
+    val newMax = if (elem.retweets > maxSoFar.retweets) elem else maxSoFar
+    right.mostRetweetedAcc(left.mostRetweetedAcc(newMax))
+  }
+  def descendingByRetweet: TweetList = {
+    def descendingByRetweetAcc(listSoFar: TweetList, newSet: TweetSet): TweetList = {
+      if (newSet.isEmpty) listSoFar
+      else {
+        val maxRT: Tweet = mostRetweeted
+        descendingByRetweetAcc(new Cons(maxRT, listSoFar), newSet.remove(maxRT))
+      }
+    }
+    descendingByRetweetAcc(Nil,this)
+  }
   /**
    * The following methods are already implemented
    */
