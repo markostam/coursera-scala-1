@@ -1,13 +1,16 @@
 # Data and Abstraction
 
 ## Class Heirarchies
+
 ### Abstract Classes
 + ```abstract class``` can contain members which are missing a definition while non abstract classes cannot
   + functions in the subclasses of the abstract class must *implement* the undefined functions in the superclass
   + it is also possible to *redefine* a non-abstract definition in a sublass by using ```override def```
+
 ### Persistent Data Structures
 + **Persistent data structures:** When we make changes to a data structure such as a binary tree, we don't mutate it. We simply add another tree in parallel to the one that already existed with the additional data that we wanted to add. Thus the original tree stays put or *persists*.
 + We implement an immutable binary tree in [IntSets.sc](https://github.com/markostam/coursera-scala-1/blob/master/objsets/src/main/scala/IntSets.sc)
+
 ### Classes vs. Objects
 + **Scala Classes**: any user-defined class extends another class. 
   + If no superclass is given, the standard class ```Object``` in the Java package ```java.lang``` is assumed.
@@ -18,6 +21,7 @@
 + **Standalone Scala Programs:** It's possible to create standalone scala apps using ```object```'s and the ```main``` function which takes an array of strings ```args: Array[String]``` as its arguments.
 
 ## How Classes Are Organized
+
 ### Packages
 + Classes and objects are organized in packages
 + to place a class or object inside a package, use a package clause at top of file
