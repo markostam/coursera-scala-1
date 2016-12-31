@@ -38,11 +38,11 @@ abstract class TweetSet {
    * This method takes a predicate and returns a subset of all the elements
    * in the original set for which the predicate is true.
    *
-   * Question: Can we implment this method here, or should it remain abstract
+   * Question: Can we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-    def filter(p: Tweet => Boolean): TweetSet = ???
-  
+  def filter(p: Tweet => Boolean): TweetSet = filterAcc(p, new Empty)
+
   /**
    * This is a helper method for `filter` that propagetes the accumulated tweets.
    */
@@ -51,10 +51,11 @@ abstract class TweetSet {
   /**
    * Returns a new `TweetSet` that is the union of `TweetSet`s `this` and `that`.
    *
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
+    *
    */
-    def union(that: TweetSet): TweetSet = ???
+  def union(that: TweetSet): TweetSet = that.filterAcc(t => true, this)
   
   /**
    * Returns the tweet from this set which has the greatest retweet count.
@@ -65,7 +66,7 @@ abstract class TweetSet {
    * Question: Should we implment this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-    def mostRetweeted: Tweet = ???
+  def mostRetweeted: Tweet = ???
   
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
@@ -76,7 +77,7 @@ abstract class TweetSet {
    * Question: Should we implment this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-    def descendingByRetweet: TweetList = ???
+  def descendingByRetweet: TweetList = ???
   
   /**
    * The following methods are already implemented
@@ -107,26 +108,24 @@ abstract class TweetSet {
 }
 
 class Empty extends TweetSet {
-    def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = ???
-  
+
+  def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
   /**
    * The following methods are already implemented
    */
-
   def contains(tweet: Tweet): Boolean = false
-
   def incl(tweet: Tweet): TweetSet = new NonEmpty(tweet, new Empty, new Empty)
-
   def remove(tweet: Tweet): TweetSet = this
-
   def foreach(f: Tweet => Unit): Unit = ()
 }
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
 
-    def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = ???
-  
-    
+    def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = {
+      if (p(elem)) left.filterAcc(p, right.filterAcc(p, acc.incl(elem)))
+      else left.filterAcc(p, right.filterAcc(p, acc))
+    }
+
   /**
    * The following methods are already implemented
    */
