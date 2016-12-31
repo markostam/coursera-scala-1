@@ -51,7 +51,7 @@
 + The only thing you can have in a ```class``` that you can't in a ```trait``` and that is *value parameters* e.g. ```Rational(numerator: Int, denominator: Int)``` from the [previous week](https://github.com/markostam/coursera-scala-1/blob/master/funsets/src/main/scala/funsets/rationals.sc)
 + Scala Class Heirarchy:
   + basically it forks numeric from non-numeric data types from superclass ```scala.Any``` to ```scala.AnyVal``` for numeric and ```scala.AnyRef``` for other.
-  ![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/objsets/img/scala_class_heirarchy.png)
+  ![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/Week3-objsets/img/scala_class_heirarchy.png)
   + ```Any```: base type of all types
     + Methods: ```==```, ```!=```, ```equals```, ```hashCode```, ```toString```
   + ```AnyRef``` base type of all reference objects, Alias of ```java.lang.Object```
