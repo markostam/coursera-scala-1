@@ -4,6 +4,8 @@
 
 ## Pure Object Orientation
 
+###Objects Everywhere
+
 + a pure OO language is one where every value is an objet. if language is based on classes, each val is a class.
 + at first glance, Scala has some exceptions to pure object orientation (primitive types, functions) but lets look closer...
 + conceptually, ```Int``` or ```Boolean``` don't get special treatment. They are just like other classes defined in package ```Scala```. 
@@ -15,3 +17,30 @@
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/80857d5980826ae352be5a7cd8eb9cb70bdf5843) 
 
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/8df6ed7e94da6b405e499cd8219faa8ec6f14f68)
+
+### Functions as Objects
+
++ functions/values are objects in scala as well
++ function type ```A => B``` is an abbreviation for scala.Function[A,B], which is roughly defined as 
+
+```scala
+package scala
+trait Function1[A,B] {
+    def apply(x: A): B
+}
+```
+
++ thus *functions are objects with ```apply``` methods*
++ there are currently traits for functions up to 22 parameters
++ anonymous function (x: Int) => x*x is expanded to 
+
+```scala
+new Function1[Int,Int] {
+    def apply(x: Int) = x * x
+}
+```
+
++ function call ```f(a,b)``` expands to ```f.apply(a,b)```
++ this parallels idea of *eta-expansion* in the lambda calculus
+
+
