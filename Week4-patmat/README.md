@@ -9,5 +9,5 @@
 + conceptually, ```Int``` or ```Boolean``` don't get special treatment. They are just like other classes defined in package ```Scala```. 
   + (the compiler eventually represents ```scala.Int``` by 32-bit integers and ```scala.Boolean``` by Java Booleans but this is just for efficiency).
   + but we *could* define a Boolean, Integer, or any other primitive from first principles.
-+ we write an [abstract class] defining natural numbers and some of their mathematical functinos (```zero```,```predecessor```, ```successor```, ```+```, ```-```) using [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) from first principles
-
++ we write an [abstract class] defining natural numbers and some of their mathematical functions (```zero```,```predecessor```, ```successor```, ```+```, ```-```) using [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) from first principles
++ recursive formulation of Peano ```+``` below using recursive successor function ```S``` and a definition of ```0```: ![](https://github.com/markostam/coursera-scala-1/blob/master/Week4-patmat/img/peano_numbers.svg)
