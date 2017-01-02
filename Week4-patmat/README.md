@@ -18,7 +18,7 @@
 
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/8df6ed7e94da6b405e499cd8219faa8ec6f14f68)
 
-### Functions as Objects
+## Functions as Objects
 
 + functions/values are objects in scala as well
 + function type ```A => B``` is an abbreviation for scala.Function[A,B], which is roughly defined as 
@@ -34,7 +34,7 @@ trait Function1[A,B] {
 + there are currently traits for functions up to 22 parameters
 
 ### Anonymous Function Expansion
-+ anonymous function (x: Int) => x*x is expanded to 
++ anonymous function ```(x: Int) => x*x``` is expanded to 
 
 ```scala
 new Function1[Int,Int] {
@@ -44,5 +44,23 @@ new Function1[Int,Int] {
 
 + function call ```f(a,b)``` expands to ```f.apply(a,b)```
 + this parallels idea of *eta-expansion* in the lambda calculus
++ using the idea of functions as objects we can expand a function to take varying numbers of args i.e.
+
+```scala
+object List {
+  def apply[T](x1: T, x2: T): List[T] = new Cons(x1, new Cons(x2, new Nil))
+  def apply[T]()                      = new Nil
+}
+
+## Subtyping and Generics
+
++ two principle types of polymorphism:
+  + subtyping - associated with OO programming
+    + we pass instances of a subtype where a base type is required
+  + generics - came from functional programming
+    + parametrize types with other types
++ in this session we will look at their interactions. Two main areas:
+  + bounds: subject type parameters to subtype constrains
+  + variance: finds how paramaterized types behave under subtyping
 
 
