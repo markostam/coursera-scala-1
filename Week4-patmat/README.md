@@ -32,6 +32,8 @@ trait Function1[A,B] {
 
 + thus *functions are objects with ```apply``` methods*
 + there are currently traits for functions up to 22 parameters
+
+### Anonymous Function Expansion
 + anonymous function (x: Int) => x*x is expanded to 
 
 ```scala
