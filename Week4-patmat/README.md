@@ -11,5 +11,7 @@
   + but we *could* define a Boolean, Integer, or any other primitive from first principles.
 + we write an [abstract class] defining natural numbers and some of their mathematical functions (```zero```,```predecessor```, ```successor```, ```+```, ```-```) using [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) from first principles
 + recursive formulation of Peano ```+``` below using recursive successor function ```S``` and a definition of ```0```: 
+
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/80857d5980826ae352be5a7cd8eb9cb70bdf5843) 
+
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/8df6ed7e94da6b405e499cd8219faa8ec6f14f68)
