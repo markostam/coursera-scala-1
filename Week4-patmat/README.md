@@ -64,4 +64,22 @@ object List {
   + bounds: subject type parameters to subtype constrains
   + variance: finds how paramaterized types behave under subtyping
 
+### Type Bounds
+
++ '''def assertAllPos[S <: IntSet](r: S) : S
+  + ```S``` a subtype of ```intSet```, ```r``` is a variable that is of type ```S``` the subtype, and we return the same type ```S``` 
++ Generally the notation:
+  + ```S <: T``` means ```S``` *is a subtype of* ```T```, and
+  + ```S >: T``` means ```S``` *is a supertype of* ```T```, or ```T```*is a subtype of* ```S```
+  + you can bind a variable from both above and below in a mixed bound
+
+### Covariance
+
++ Given ```NonEmpty <: IntSet```, is ```List[NonEmpty] <: List[IntSet]```?
++ We call types for which this relationship holds ***covariant*** because their subtyping relationship varies with the type parameter
++ Should all parameterized types be covariant? 
+  + TLDR: No
+    + Lists are covariant
+    + Arrays are not covariant
+
 
