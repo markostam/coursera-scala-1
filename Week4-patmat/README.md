@@ -95,13 +95,24 @@ object List {
   + ```C[+A] { ... }``` is *covariant*
   + ```C[-A] { ... }``` is *contravariant*
   + ```C[A] { ... }``` is *nonvariant*
-+ Function trait declaration
-  + Functions are contravariant in their arg types and covariant in their result type
+
+### Variance Checks
++ The Scala compiler will check that there are no problematic combinations when compiling a class with variance annotations:
+  + *covariant* type parameters can only appear in method results
+  + *contravariant* type parameters can only appear in method parameters
+  + *invariant* type parameters can appear anywhere
+
+### Function trait declaration
++ Functions are contravariant in their arg types and covariant in their result type
   
-  ```scala
-  package scala
-  trait Function`[-T,+U] {
-    def apply(x: T): U 
-  }
-  ```
+```scala
+package scala
+trait Function`[-T, +U] {
+  def apply(x: T): U 
+}
+```
+
+### Variance and Lists
++ we give an example of how defining variance can be useful by looking back at the [```IntList```](https://github.com/markostam/coursera-scala-1/blob/master/Week3-objsets/src/main/scala/IntList.sc) worksheet we defined back in [Week 3](https://github.com/markostam/coursera-scala-1/tree/master/Week3-objsets)
+  + in our original implementation we defined ```Nil``` as a ```Class```, whereas we would prefer to define it as an ```Object```, since there should only be one ```Nil``` theoretically.
   
