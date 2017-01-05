@@ -48,7 +48,7 @@
 + if a class has several natural supertypes to which it wants to inherit code, you can use a ```trait```
 + A ```trait``` is declared like an abstract class just with ```trait``` instead of ```abstract class```
 + ```trait```s can extend unrelated classes arbitrarily
-+ The only thing you can have in a ```class``` that you can't in a ```trait``` and that is *value parameters* e.g. ```Rational(numerator: Int, denominator: Int)``` from the [previous week](https://github.com/markostam/coursera-scala-1/blob/master/funsets/src/main/scala/funsets/rationals.sc)
++ The only thing you can have in a ```class``` that you can't in a ```trait``` and that is *value parameters* e.g. ```Rational(numerator: Int, denominator: Int)``` from the [previous week](https://github.com/markostam/coursera-scala-1/blob/master/Week2-funsets/src/main/scala/funsets/rationals.sc)
 + Scala Class Heirarchy:
   + basically it forks numeric from non-numeric data types from superclass ```scala.Any``` to ```scala.AnyVal``` for numeric and ```scala.AnyRef``` for other.
   ![Scala Class Heirarchy](https://github.com/markostam/coursera-scala-1/blob/master/Week3-objsets/img/scala_class_heirarchy.png)
