@@ -114,5 +114,11 @@ trait Function`[-T, +U] {
 
 ### Variance and Lists
 + we give an example of how defining variance can be useful by looking back at the [```IntList```](https://github.com/markostam/coursera-scala-1/blob/master/Week3-objsets/src/main/scala/IntList.sc) worksheet we defined back in [Week 3](https://github.com/markostam/coursera-scala-1/tree/master/Week3-objsets)
-  + in our original implementation we defined ```Nil``` as a ```Class```, whereas we would prefer to define it as an ```Object```, since there should only be one ```Nil``` theoretically.
-  
+  + in our original implementation we defined ```Nil``` as a Class, whereas we would prefer to define it as an Object, since there should only be one ```Nil``` theoretically.
+  + we can change this by making the ```List``` trait covariant
+  + when we make ```Nil``` an Object, we remove it's params since Objects take no params. Thus we have to change its definition from 
+    + ```class Nil[T] extends List[T] { ```
+      + to 
+    + ```object Nil extends List[Nothing] {```
+  + we give it ```Nothing``` as a parameter since ```Nothing``` is a subtype of all classes in Scala
+  + then, if we define our ```List``` trait as *covariant* by doing ```trait List[+T]{```, we can give ```List``` any class which is a supertype of ```Nothing```, which by definition is all classes.
