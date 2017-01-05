@@ -78,9 +78,9 @@ object List {
 + Given ```NonEmpty <: IntSet```, is ```List[NonEmpty] <: List[IntSet]```?
 + We call types for which this relationship holds ***covariant*** because their subtyping relationship varies with the type parameter
 + Should all parameterized types be covariant? 
-  + TLDR: No
-    + Lists are covariant - roughly because it is immutable
-    + Arrays are not covariant - roughly because it is mutable
+  + **TLDR: No**
+    + *Lists are covariant* - roughly because they are immutable
+    + *Arrays are not covariant* - roughly because they are mutable
 
 + Liskov Substitution Principle (Barbara Liskov) tells when a type can be a subtype of another:
   + * If ```A <: B``` then everything one ca do with a value of type ```b``` one should also be able to do with a value of type ```A```
@@ -95,4 +95,13 @@ object List {
   + ```C[+A] { ... }``` is *covariant*
   + ```C[-A] { ... }``` is *contravariant*
   + ```C[A] { ... }``` is *nonvariant*
-+
++ Function trait declaration
+  + Functions are contravariant in their arg types and covariant in their result type
+  
+  ```scala
+  package scala
+  trait Function`[-T,+U] {
+    def apply(x: T): U 
+  }
+  ```
+  
