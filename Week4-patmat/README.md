@@ -120,5 +120,5 @@ trait Function`[-T, +U] {
     + ```class Nil[T] extends List[T] { ```
       + to 
     + ```object Nil extends List[Nothing] {```
-  + we give it ```Nothing``` as a parameter since ```Nothing``` is a subtype of all classes in Scala
+  + we give it ```Nothing``` as a parameter since ```Nothing``` is a subtype of all classes in Scala (as we [recall from last week's slides](https://raw.githubusercontent.com/markostam/coursera-scala-1/master/Week3-objsets/img/scala_class_heirarchy.png))
   + then, if we define our ```List``` trait as *covariant* by doing ```trait List[+T]{```, we can give ```List``` any class which is a supertype of ```Nothing```, which by definition is all classes.
