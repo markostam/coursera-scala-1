@@ -79,7 +79,20 @@ object List {
 + We call types for which this relationship holds ***covariant*** because their subtyping relationship varies with the type parameter
 + Should all parameterized types be covariant? 
   + TLDR: No
-    + Lists are covariant
-    + Arrays are not covariant
+    + Lists are covariant - roughly because it is immutable
+    + Arrays are not covariant - roughly because it is mutable
 
++ Liskov Substitution Principle (Barbara Liskov) tells when a type can be a subtype of another:
+  + * If ```A <: B``` then everything one ca do with a value of type ```b``` one should also be able to do with a value of type ```A```
+  
+## Variance
 
++ There are actually three possible relationships WRT variance:
+  + ```C[A] <: C[B]```    ```C``` is *covariant*
+  + ```C[A] >: C[B]```    ```C``` is *contravariant*
+  + neither ```C[A]``` nor ```C[B]``` is a subtype of the other    ```C``` is *nonvariant*
++ Scala lets you declare the variance of a type by annontating the type parameter
+  + ```C[+A] { ... }``` is *covariant*
+  + ```C[-A] { ... }``` is *contravariant*
+  + ```C[A] { ... }``` is *nonvariant*
++
