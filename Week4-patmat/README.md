@@ -122,3 +122,21 @@ trait Function`[-T, +U] {
     + ```object Nil extends List[Nothing] {```
   + we give it ```Nothing``` as a parameter since ```Nothing``` is a subtype of all classes in Scala (as we [recall from last week's slides](https://raw.githubusercontent.com/markostam/coursera-scala-1/master/Week3-objsets/img/scala_class_heirarchy.png))
   + then, if we define our ```List``` trait as *covariant* by doing ```trait List[+T]{```, we can give ```List``` any class which is a supertype of ```Nothing```, which by definition is all classes.
+
+### Lower Bounds
+
++ We give our [List]() trait a prepend function defined as 
+
+```scala
+  def prepend[U >: T](elem: U): List[U] = new Cons(elem, this)
+```
+
++ notice that we cannot just give it 
+
+```scala
+  def prepend(elem: T): List[T] = new Cons(elem, this)
+
+```
+because this will fail variance checks. The above passes variance checks since 
+  + covariant type parameters may appear in lower bounds of method type parameters
+  + contravariant type parameters may appear in upper bounds of method
