@@ -158,7 +158,7 @@ e match {
 }
 ```
 
-+++ Forms of patterns
+### Forms of patterns
 
 + Patterns constructed from:
   + constructors: e.g. ```Number```, ```Sum```
@@ -170,7 +170,7 @@ e match {
   + we give variables lower case first letters and constants uppercase
   + the only exceptions are reserved words ```null```, ```true```, ```false```
 
-+++ Pattern Matching and Methods
+### Pattern Matching and Methods
 
 + It's also possible to define the eval function as a method of the base trait e.g.:
 
@@ -183,7 +183,7 @@ trat Expr {
 }
 ```
 
-+++ "The Expression Problem"
+### "The Expression Problem"
 + Do we define the ```eval``` method in the base ```trait``` as above or in each method as we did before?
   + are you are more often creating subclasses or more often creating new methods?
     + if mostly new subclasses, the OO decomposition is better because you just have to edit the local subclass as opposed to editing the parent trait.
