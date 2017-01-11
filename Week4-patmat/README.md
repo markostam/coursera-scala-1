@@ -140,3 +140,53 @@ trait Function`[-T, +U] {
 because this will fail variance checks. The above passes variance checks since 
   + covariant type parameters may appear in lower bounds of method type parameters
   + contravariant type parameters may appear in upper bounds of method
+
+## Pattern Matching
+
+### Case Class
+
++ case classes are like classes but give you some automatic functionality
+  + implicitly define companion objects with apply methods
+
++ Syntax of pattern matching: 
+
+```scala
+e match {
+    case pat1 => expr
+      ...
+    case pat2 => expr2
+}
+```
+
++++ Forms of patterns
+
++ Patterns constructed from:
+  + constructors: e.g. ```Number```, ```Sum```
+  + variables: e.g. ```n```, ```e1```, ```e2```
+  + wildcarsd: ```_```
+  + constants: e.g. ```true```
+
++ How to differentiate a variable ```n``` from a constant ```N```?
+  + we give variables lower case first letters and constants uppercase
+  + the only exceptions are reserved words ```null```, ```true```, ```false```
+
++++ Pattern Matching and Methods
+
++ It's also possible to define the eval function as a method of the base trait e.g.:
+
+```scala
+trat Expr {
+    def eval: Int = this match {
+        case Number(n) =>     n
+        case Sum(e1, e2) =>   e1.eval + e2.eval
+    }
+}
+```
+
++++ "The Expression Problem"
++ Do we define the ```eval``` method in the base ```trait``` as above or in each method as we did before?
+  + are you are more often creating subclasses or more often creating new methods?
+    + if mostly new subclasses, the OO decomposition is better because you just have to edit the local subclass as opposed to editing the parent trait.
+    + on the other hand if you're just creating methods that will affect each subclass, the editing the parent trait is probably better since you just have to add a new case to the pattern match.
+
+
