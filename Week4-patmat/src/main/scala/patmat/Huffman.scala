@@ -74,8 +74,23 @@ object Huffman {
    *       println("integer is  : "+ theInt)
    *   }
    */
-    def times(chars: List[Char]): List[(Char, Int)] = ???
-  
+    def times(chars: List[Char]): List[(Char, Int)] = {
+      chars.foldLeft(Map[Char,Int]()){
+        (m, ch) => m + (ch -> (m.getOrElse(ch, 0) + 1))
+      }.toList
+    }
+
+  def times2(chars: List[Char]): List[(Char, Int)] = {
+    val m : Map[Char, Int] = Map()
+    def times2f(chars:List[Char], m: Map[Char, Int]): Map[Char, Int] = chars match {
+      case Nil     => return m
+      case x :: xs => {
+        val mapAcc = m + (x -> (m.getOrElse(x, 0) + 1))
+        times2f(xs, mapAcc)
+      }
+    }
+    times2f(chars,m).toList
+  }
   /**
    * Returns a list of `Leaf` nodes for a given frequency table `freqs`.
    *
