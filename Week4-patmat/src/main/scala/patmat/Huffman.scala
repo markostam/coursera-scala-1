@@ -91,6 +91,7 @@ object Huffman {
     }
     times2f(chars,m).toList
   }
+
   /**
    * Returns a list of `Leaf` nodes for a given frequency table `freqs`.
    *
@@ -98,12 +99,17 @@ object Huffman {
    * head of the list should have the smallest weight), where the weight
    * of a leaf is the frequency of the character.
    */
-    def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = ???
+    def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = {
+      freqs.map(x => Leaf(x._1,x._2)).sortBy(_.weight)
+    }
   
   /**
    * Checks whether the list `trees` contains only one single code tree.
    */
-    def singleton(trees: List[CodeTree]): Boolean = ???
+    def singleton(trees: List[CodeTree]): Boolean = trees match {
+      case x :: Nil => true
+      case _        => false
+    }
   
   /**
    * The parameter `trees` of this function is a list of code trees ordered
