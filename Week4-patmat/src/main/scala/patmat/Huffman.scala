@@ -123,7 +123,20 @@ object Huffman {
    * If `trees` is a list of less than two elements, that list should be returned
    * unchanged.
    */
-    def combine(trees: List[CodeTree]): List[CodeTree] = ???
+
+  case class Fork(left: CodeTree, right: CodeTree,
+                  chars: List[Char], weight: Int) extends CodeTree
+  case class Leaf(char: Char, weight: Int) extends CodeTree
+
+
+  def combine(trees: List[CodeTree]): List[CodeTree] = trees match {
+      case x :: Nil => x :: Nil
+      case Leaf(x,y) :: Leaf(a,b) :: xs             => Fork(Leaf(x,y), Leaf(a,b), List(x,a), y+b) :: xs
+      case Fork(x1,y1,x,y) :: Leaf(a,b) :: xs       => Fork(Fork(x1,y1,x,y), Leaf(a,b), a :: x, y+b) :: xs
+      case Leaf(x,y) :: Fork(a1,b1,a,b) :: xs       => Fork(Leaf(x,y), Fork(a1,b1,a,b), x :: a, y+b) :: xs
+      case Fork(x1,y1,x,y) :: Fork(a1,b1,a,b) :: xs => Fork(Fork(x1,y1,x,y), Fork(a1,b1,a,b), x ::: a, y+b) :: xs
+    }
+
   
   /**
    * This function will be called in the following way:
@@ -172,7 +185,7 @@ object Huffman {
 
   /**
    * What does the secret message say? Can you decode it?
-   * For the decoding use the `frenchCode' Huffman tree defined above.
+   * For the decoding use the 'frenchCode' Huffman tree defined above.
    */
   val secret: List[Bit] = List(0,0,1,1,1,0,1,0,1,1,1,0,0,1,1,0,1,0,0,1,1,0,1,0,1,1,0,0,1,1,1,1,1,0,1,0,1,1,0,0,0,0,1,0,1,1,1,0,0,1,0,0,1,0,0,0,1,0,0,0,1,0,1)
 
