@@ -89,9 +89,12 @@ object Anagrams {
    *  in the example above could have been displayed in some other order.
    */
   def combinations(occurrences: Occurrences): List[Occurrences] = {
-    for ((o,n) <- occurrences)
-      for (i <- Range(0,n))
-        yield List(o,i)
+    val n = for ((o,n) <- occurrences)
+      yield for (i <- Range(0, n))
+        yield (o, i)
+    n.flatten.combinations(occurrences.size).
+      toList.filter(x => x.map(_._1).toSet.size>1).
+      map(x=> x.filter(_._2!=0))
   }
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
