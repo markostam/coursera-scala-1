@@ -171,13 +171,26 @@ object Huffman {
    * This function decodes the bit sequence `bits` using the code tree `tree` and returns
    * the resulting list of characters.
    */
+
+  def decode2(tree: CodeTree, bits: List[Bit]): List[Char] = {
+    def traverse(remaining: CodeTree, bits: List[Bit]): List[Char] = remaining match {
+      case Leaf(c, _) if bits.isEmpty => List(c)
+      case Leaf(c, _) => c :: traverse(tree, bits)
+      case Fork(left, right, _, _) if bits.head == 0 => traverse(left, bits.tail)
+      case Fork(left, right, _, _) => traverse(right, bits.tail)
+    }
+
+    traverse(tree, bits)
+  }
+
   def decode(tree: CodeTree, bits: List[Bit]): List[Char] =  {
     def decodeF(treeLeft: CodeTree, bits: List[Bit]): List[Char] = (treeLeft, bits) match {
       case (l: Leaf, Nil) => List(l.char)
-      case (l: Leaf, b) => l.char :: decodeF(tree, b)
+      case (l: Leaf, b) => l.char :: decodeF(tree, bits)
       case (f: Fork, 0 :: bs) => decodeF(f.left, bs)
       case (f: Fork, 1 :: bs) => decodeF(f.right, bs)
-      case _ => throw new Error("decodeF: invalid input")
+      case (f: Fork, Nil)     => Nil
+      case (t,b)              => println(t); println(b); throw new  Error("decodeF: invalid input")
     }
     decodeF(tree,bits)
   }
@@ -252,8 +265,7 @@ object Huffman {
    */
     def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = {
       def prepend(b: Bit)(code: (Char, List[Bit])): (Char, List[Bit]) = (code._1, b :: code._2)
-
-      a.map(prepend(0)) ::: b.map(prepend(1))
+      a.map(prepend(1)) ::: b.map(prepend(0))
     }
   
   /**
