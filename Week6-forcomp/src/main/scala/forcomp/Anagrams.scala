@@ -90,7 +90,7 @@ object Anagrams {
    */
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     val n = for ((o,n) <- occurrences)
-      yield for (i <- Range(0, n))
+      yield for (i <- 0 to n)
         yield (o, i)
     n.flatten.combinations(occurrences.size).
       toList.filter(x => x.map(_._1).toSet.size>1).
@@ -107,7 +107,7 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = ???
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = x.filterNot(y.toSet)
 
   /** Returns a list of all anagram sentences of the given sentence.
    *
@@ -149,5 +149,10 @@ object Anagrams {
    *
    *  Note: There is only one anagram of an empty sentence.
    */
-  def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+  def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
+    val s = combinations(sentenceOccurrences(sentence))
+    for (i <- s) {
+
+    }
+  }
 }
