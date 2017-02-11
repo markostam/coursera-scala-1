@@ -225,7 +225,7 @@ abstract class List[T] { ...
 
 ```
 
-### foldRight and reduceRight
+### Implementations of foldRight and reduceRight
 
 + duals of foldLeft and reduceLeft
 + Implementation is pretty much the same except they start at the end of the list by doing 
