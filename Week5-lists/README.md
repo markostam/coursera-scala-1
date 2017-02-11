@@ -64,7 +64,7 @@ def removeAt[T](xs: List[T], n: Int) = (xs take n) ::: (xs drop n+1)
     + sort the two sublists
     + merge the two sorted sublists into a single sorted list
 
- ```scala
+```scala
   
 def msort(xs: List[Int]): List[Int] = {
     val n = xs.length/2
@@ -80,6 +80,99 @@ def msort(xs: List[Int]): List[Int] = {
         val (fst,snd) = xs.splitAt(n)
         merge(msort(fst),msort(snd))
     }
+}
+
+```
+
+## Parametrization 
+
+### making msort more general
+
+```scala
+  
+def msort[T](xs: List[T])(lt: (T,T) => Boolean): List[T] = {
+    val n = xs.length/2
+
+    def merge[T](xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
+        case (Nil, ys) => ys
+        case (xs, Nil) => xs
+        case (x :: xs1, y :: ys1) => if (lt(x,y)) x :: merge(xs1,ys) else y :: merge(xs, ys1)
+    }
+
+    if (n==0) xs
+    else {
+        val (fst,snd) = xs.splitAt(n)
+        merge(msort(fst)(lt),msort(snd)(lt))
+    }
+}
+
+```
+
++ note: you can also use built in scala math.Ordering.[T](x,y) function instead of writing your own ordering function ```lt```
+
+### using an implicit for the ordering function
+
+```scala
+ 
+ // TODO: this is code from the lecture but doesn't compile, why? 
+def msort[T](xs: List[T])(implmicit ord: math.Ordering[T]): List[T] = {
+    val n = xs.length/2
+
+    def merge[T](xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
+        case (Nil, ys) => ys
+        case (xs, Nil) => xs
+        case (x :: xs1, y :: ys1) => if (ord.lt(x,y)) x :: merge(xs1,ys) else y :: merge(xs, ys1)
+    }
+
+    if (n==0) xs
+    else {
+        val (fst,snd) = xs.splitAt(n)
+        merge(msort(fst),msort(snd))
+    }
+}
+
+```
+
+### Rules for implicit parameters
+
++ if a function takes an implicit of type ```T```:
+  + the compiler will search for a def that:
+    + is marked ```implicit```
+    + has a type compatible with ```T```
+    + is visible at the point of the function call, or di defined in a companion object associated with ```T```
+
++ if there is a single (most specific) definition, it will be taken as actual arg for the implicit
++ else its an error
+
+## Higher order List functions
+
+### Map
+
+```scala
+
+abstract class List[T] { ...
+	def map[U](f: T => U): List(U) = this match {
+		case Nil     => this
+		case x :: xs => f(x) :: xs.map(f)
+	}
+}
+
+```
+
++ In reality the scala map function is more complicated
+  1. because it's tail recursive
+  2. becuase it works for arbirtrary collections, not just lists
++ but this is good enough for an understanding of how it works
+
+### Filter
+
+ ```scala
+
+abstract class List[T] { ...
+	def filter(p: T => Boolean): List(U) = this match {
+		case Nil     => this
+		case x :: xs => if (p(x)) x :: xs.filter(p) else xs.filter(p)
+	}
 }
 
 ```
