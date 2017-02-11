@@ -176,3 +176,14 @@ abstract class List[T] { ...
 }
 
 ```
+	}
+}
+
+### Variations of Filter
+
++ ```xs.filterNot(p)``` = Same as ```xs.filter(x => !p(x))```
++ ```xs.partition(p)``` = Same as ```(xs.filter(p(x)), xs.filterNot(p(x))```, but computed in one traversal of the list
++ ```xs.takeWhile(p)``` = longest prefix of list ```xs``` consisting of elements that satisfy predicate ```p```
++ ```xs.dropWhile(p)``` = remainder of list ```xs``` after any leading elemnts satisfying ```p``` have beeen removed
++ ```xs.span(p)```      = Same as ```(xs.takeWhile(p(x)), xs.dropWhile(p(x))```, but computed in one traversal of the list
+
