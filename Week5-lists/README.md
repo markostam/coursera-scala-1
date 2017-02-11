@@ -228,6 +228,14 @@ abstract class List[T] { ...
 + foldLeft and reduceLeft also have duals, foldRight and reduceRight. 
 + Implementation is pretty much the same except they start at the end of the list by doing 
 
-```case x :: xs => op(x, (xs.foldRight(z)(op)))``` for the last line of the fold function instead of 
+```scala
 
-```case x :: xs => (xs.foldLeft(op(z,x))(op))```
+case x :: xs => op(x, (xs.foldRight(z)(op)))
+``` 
+
+for the last line of the fold function instead of 
+
+```scala
+
+case x :: xs => (xs.foldLeft(op(z,x))(op))
+```
