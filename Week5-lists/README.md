@@ -225,7 +225,9 @@ abstract class List[T] { ...
 
 ```
 
-+ foldLeft and reduceLeft also have duals, foldRight and reduceRight. 
+### foldRight and reduceRight
+
++ duals of foldLeft and reduceLeft
 + Implementation is pretty much the same except they start at the end of the list by doing 
 
 ```scala
