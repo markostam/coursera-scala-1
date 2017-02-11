@@ -191,10 +191,7 @@ abstract class List[T] { ...
 
 ### foldLeft
 
-```scala
-
-(List(x1...xn)).foldLeft(z)(op) = (...(z op x1)... op ...) op xn
-```
+```(List(x1...xn).foldLeft(z)(op)) = (...(z op x1)... op ...) op xn
 
 ```
             op
@@ -206,3 +203,27 @@ abstract class List[T] { ...
     z   x1
 ```
 
+### Reduce
+
++ reduce is just a special case of foldLeft defined for specific types
+
+### Implementations of reduceLeft and foldLeft
+
+```scala
+
+abstract class List[T] { ...
+	def reduceLeft(op: (T,T) => T): T = this match {
+		case Nil     => throw new Error("Nil.reduceLeft")
+		case x :: xs => (xs.foldLeft(x))(op)
+	}
+
+	def foldLeft[U](z: U)(op: (U,T) => U) : U = this match {
+		case Nil     => z
+		case x :: xs => (xs.foldLeft(op(z,x))(op))
+	}
+}
+
+```
+
++ foldLeft and reduceLeft also have duals, foldRight and reduceRight. 
++ Implementation is pretty much the same except they start at the end of the list by doing ```case x :: xs => op(x, (xs.foldRight(z)(op)))``` for the last line of the fold function instead of ```case x :: xs => (xs.foldLeft(op(z,x))(op))```
