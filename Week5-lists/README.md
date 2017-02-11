@@ -187,3 +187,19 @@ abstract class List[T] { ...
 + ```xs.dropWhile(p)``` = remainder of list ```xs``` after any leading elemnts satisfying ```p``` have beeen removed
 + ```xs.span(p)```      = Same as ```(xs.takeWhile(p(x)), xs.dropWhile(p(x))```, but computed in one traversal of the list
 
+## Fold / Reduce Combinators
+
+### foldLeft
+
+```(List(x1...xn).foldLeft(z)(op)) = (...(z op x1)... op ...) op xn
+
+```
+            op
+           /  \
+         op   xn
+        /  \ 
+      op   x2
+     /  \
+    z   x1
+```
+
