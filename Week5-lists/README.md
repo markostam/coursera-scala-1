@@ -4,18 +4,18 @@
 
 ### Sublists and element access
 
-+ xs.length = returns number of elements
-+ xs.last = list's last element, exception if empty
-+ xs.init = new list that drops last element of xs (dual of last)
-+ xs.take(n) = first n elemns of xs, or just xs if it's shorter than n
-+ xs.drop(n) = rest of the list after n elements (dual of take)
-+ xs(n) = (or xs.apply(n)) elemnt of xs at index n
++ ```xs.length``` = returns number of elements
++ ```xs.last``` = list's last element, exception if empty
++ ```xs.init``` = new list that drops last element of xs (dual of last)
++ ```xs.take(n)``` = first n elemns of xs, or just xs if it's shorter than n
++ ```xs.drop(n)``` = rest of the list after n elements (dual of take)
++ ```xs(n)``` = (or xs.apply(n)) elemnt of xs at index n
 
 ### Creating new lists
 
-+ xs ++ ys = xs ::: ys = concatenate xs and ys
-+ xs.reverse = reverse order
-+ xs.updated(n,x) = list containing same elements as xs, but replace element with index n with x
++ ```xs ++ ys``` = concatenate xs and ys
++ ```xs.reverse``` = reverse order
++ ```xs.updated(n,x)``` = list containing same elements as xs, but replace element with index n with x
 
 ### Finding elements
 
