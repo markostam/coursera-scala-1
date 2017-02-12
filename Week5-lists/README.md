@@ -1,4 +1,4 @@
-# List Utility Methods
+# Lists Deep-Dive aka List Utility Methods
 
 ## List Methods
 
