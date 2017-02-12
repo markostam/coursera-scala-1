@@ -40,7 +40,8 @@ object Anagrams {
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences = {
-    wordOccurrences(s.reduce(_+_)).sortBy(_._1)
+    if (s.isEmpty) Nil:Occurrences
+    else wordOccurrences(s.reduce(_+_)).sortBy(_._1)
   }
 
   /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
@@ -91,8 +92,7 @@ object Anagrams {
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     if (occurrences == Nil) List(Nil)
     else {
-      val n =
-        for {
+      val n = for {
           (o, n) <- occurrences
           i      <- 0 to n
         } yield (o, i)
@@ -115,8 +115,8 @@ object Anagrams {
   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
     val differences = x.filterNot(ix => y.unzip._1.contains(ix._1))
     def edits(x: Occurrences, y: Occurrences): Occurrences = for {
-      (ixc, ixn) <- x.filter(ix => y.unzip._1.contains(ix._1))
-      (iyc, iyn) <- y.filter(iy => x.unzip._1.contains(iy._1))
+      (ixc, ixn) <- x
+      (iyc, iyn) <- y
       if (ixc == iyc)
     } yield (ixc, ixn - iyn)
 
