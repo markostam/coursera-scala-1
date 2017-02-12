@@ -191,7 +191,10 @@ abstract class List[T] { ...
 
 ### foldLeft
 
-```(List(x1...xn).foldLeft(z)(op)) = (...(z op x1)... op ...) op xn
+```scala
+
+(List(x1...xn).foldLeft(z)(op)) = (...(z op x1)... op ...) op xn
+```
 
 ```
             op
