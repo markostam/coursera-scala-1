@@ -68,5 +68,5 @@ for {
 
 ## Sets
 
-+ set *** don't keep duplicates***, and they are ***unordered***
++ set ***don't keep duplicates***, and they are ***unordered***
 + can use most sequence operations like ```map``` and ```filter```
