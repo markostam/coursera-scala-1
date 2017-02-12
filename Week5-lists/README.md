@@ -13,7 +13,7 @@
 
 ### Creating new lists
 
-+ xs ++ ys = concatenate xs and ys
++ xs ++ ys = xs ::: ys = concatenate xs and ys
 + xs.reverse = reverse order
 + xs.updated(n,x) = list containing same elements as xs, but replace element with index n with x
 
