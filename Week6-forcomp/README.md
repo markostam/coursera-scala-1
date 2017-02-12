@@ -48,3 +48,25 @@ val r: Range = 1 to 5 // 1,2,3,4,5
 + ```xs.unip``` = dual of ```zip```, returns tuple of two lists drawn from the respective first and second half of the tupes in list xs
 + ```xs.flatMap(f)``` = applies ```f``` to all elements of ```xs``` and concatenates results
 
+## For-expressions
+
+``` for ( p <- persion if p.age > 20 ) yield p.name ```
+equivalent to
+``` persions.filter(_.age > 20).map(_.name)```
+
+### multiline for uses braces instead of parentheses
+
+```scala
+
+for {
+    i <- 1 until n
+    j <- 1 until i
+    if isPrime(i+j)
+    } yield (i,j)
+
+```
+
+## Sets
+
++ set *** don't keep duplicates***, and they are ***unordered***
++ can use most sequence operations like ```map``` and ```filter```
