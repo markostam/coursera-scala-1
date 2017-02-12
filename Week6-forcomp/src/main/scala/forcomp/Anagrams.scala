@@ -35,12 +35,12 @@ object Anagrams {
    *  Note: you must use `groupBy` to implement this method!
    */
   def wordOccurrences(w: Word): Occurrences = {
-    w.toLowerCase.groupBy(x => x).mapValues(_.size).toList
+    w.toLowerCase.groupBy(x => x).mapValues(_.size).toList.sortBy(_._1)
   }
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences = {
-    wordOccurrences(s.reduce(_+_))
+    wordOccurrences(s.reduce(_+_)).sortBy(_._1)
   }
 
   /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
@@ -89,12 +89,15 @@ object Anagrams {
    *  in the example above could have been displayed in some other order.
    */
   def combinations(occurrences: Occurrences): List[Occurrences] = {
-    val n = for ((o,n) <- occurrences)
-      yield for (i <- 0 to n)
-        yield (o, i)
-    n.flatten.combinations(occurrences.size).
-      toList.filter(x => x.map(_._1).toSet.size>1).
-      map(x=> x.filter(_._2!=0))
+    if (occurrences == Nil) List(Nil)
+    else {
+      val n = for ((o, n) <- occurrences)
+        yield for (i <- 0 to n)
+          yield (o, i)
+      n.flatten.combinations(occurrences.size).
+        toList.filter(x => x.map(_._1).toSet.size > 1).
+        map(x => x.filter(_._2 != 0))
+    }
   }
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
@@ -149,10 +152,12 @@ object Anagrams {
    *
    *  Note: There is only one anagram of an empty sentence.
    */
+
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
     val s = combinations(sentenceOccurrences(sentence))
     for (i <- s) {
-
+      println(i)
     }
+    List(List("Zulu", "nil", "Rex"))
   }
 }
