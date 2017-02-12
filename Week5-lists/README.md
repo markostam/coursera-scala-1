@@ -19,8 +19,8 @@
 
 ### Finding elements
 
-+ xs.indexOf(x) = the index of the first elemnt in xs equal to x, or -1 if x doesn't appear
-+ xs.contains(x) = boolean indicating whether element appears in list
++ ```xs.indexOf(x)``` = the index of the first elemnt in xs equal to x, or -1 if x doesn't appear
++ ```xs.contains(x)``` = boolean indicating whether element appears in list
 
 ### Implementation of Concatenation
 
