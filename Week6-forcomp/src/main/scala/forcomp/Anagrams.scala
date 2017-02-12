@@ -91,10 +91,12 @@ object Anagrams {
   def combinations(occurrences: Occurrences): List[Occurrences] = {
     if (occurrences == Nil) List(Nil)
     else {
-      val n = for ((o, n) <- occurrences)
-        yield for (i <- 0 to n)
-          yield (o, i)
-      n.flatten.combinations(occurrences.size).
+      val n =
+        for {
+          (o, n) <- occurrences
+          i      <- 0 to n
+        } yield (o, i)
+      n.combinations(occurrences.size).
         toList.filter(x => x.map(_._1).toSet.size > 1).
         map(x => x.filter(_._2 != 0))
     }
@@ -110,8 +112,16 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = x.filterNot(y.toSet)
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = {
+    val differences = x.filterNot(ix => y.unzip._1.contains(ix._1))
+    def edits(x: Occurrences, y: Occurrences): Occurrences = for {
+      (ixc, ixn) <- x.filter(ix => y.unzip._1.contains(ix._1))
+      (iyc, iyn) <- y.filter(iy => x.unzip._1.contains(iy._1))
+      if (ixc == iyc)
+    } yield (ixc, ixn - iyn)
 
+    (edits(x,y) ++ differences).filter(_._2 > 0).sortBy(_._1)
+  }
   /** Returns a list of all anagram sentences of the given sentence.
    *
    *  An anagram of a sentence is formed by taking the occurrences of all the characters of
@@ -154,10 +164,18 @@ object Anagrams {
    */
 
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
-    val s = combinations(sentenceOccurrences(sentence))
-    for (i <- s) {
-      println(i)
+    def sentenceAnagramsF(occurrences: Occurrences): List[Sentence] = {
+      if (occurrences.isEmpty) List(Nil)
+      else for {
+        combination <- combinations( occurrences )
+        word        <- dictionaryByOccurrences.getOrElse(combination, Nil)
+        sentence    <- sentenceAnagramsF( subtract(occurrences,wordOccurrences(word)) )
+        if combination.nonEmpty
+      } yield word :: sentence
     }
-    List(List("Zulu", "nil", "Rex"))
+    if (sentence.isEmpty) List(Nil)
+    else {
+      sentenceAnagramsF(sentenceOccurrences(sentence))
+    }
   }
 }
