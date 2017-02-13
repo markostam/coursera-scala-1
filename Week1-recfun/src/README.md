@@ -1,7 +1,7 @@
 # Week 1: Functions & Evaluation
 
 + "In this week, we'll learn the difference between functional imperative programming. We step through the basics of Scala; covering expressions, evaluation, conditionals, functions, and recursion."
-+ The following notes are from the Scala Cheat Sheet:
++ The following notes are from the [scala cheat sheet](https://github.com/lampepfl/progfun-wiki/blob/gh-pages/CheatSheet.md):
 
 ## Evaluation Rules
 
