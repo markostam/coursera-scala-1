@@ -66,12 +66,7 @@ for {
 
 ```
 
-## Sets
-
-+ set ***don't keep duplicates***, and they are ***unordered***
-+ can use most sequence operations like ```map``` and ```filter```
-
-## N-Queens algorithm
+### N-Queens algorithm
 
 + idea is to calculate all possible ways to place n queens on an n-by-b chessboard without any of them being in danger of being taken from the others
 + we solve this primarily  using for comp's
@@ -118,6 +113,11 @@ for {
 // to run use:
 nqueens.prettyprint(8)
 ```
+
+## Sets
+
++ set ***don't keep duplicates***, and they are ***unordered***
++ can use most sequence operations like ```map``` and ```filter```
 
 ## Maps
 
