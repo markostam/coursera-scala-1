@@ -39,3 +39,49 @@ Converting a function with multiple arguments into a function with a single argu
 
 ```
 
+### Classes
+
+```scala
+
+    class MyClass(x: Int, y: Int) {           // Defines a new type MyClass with a constructor  
+      require(y > 0, "y must be positive")    // precondition, triggering an IllegalArgumentException if not met  
+      def this (x: Int) = { ... }             // auxiliary constructor   
+      def nb1 = x                             // public method computed every time it is called  
+      def nb2 = y  
+      private def test(a: Int): Int = { ... } // private method  
+      val nb3 = x + y                         // computed only once  
+      override def toString =                 // overridden method  
+          member1 + ", " + member2 
+    }
+
+    new MyClass(1, 2) // creates a new object of type
+
+```
+
+```this``` references the current object, ```assert(<condition>)``` issues ```AssertionError``` if condition is not met. See ```scala.Predef``` for ```require```, ```assume``` and ```assert```.
+
+### Operators
+
++ Infix notation:
+  + ```myObject myMethod 1``` is the same as calling ```myObject.myMethod(1)```
++ Operator (i.e. function) names can be alphanumeric, symbolic (e.g. ```x1```, ```*```, ```+?%&```, ```vector_++```, ```counter_=```)
++ The precedence of an operator is determined by its first character, with the following increasing order of priority:
+
+
+```scala
+
+(all letters)
+|
+^
+&
+< >
+= !
+:
++ -
+* / %
+(all other special characters)
+
+```
+
++ The associativity of an operator is determined by its last character: Right-associative if ending with :, Left-associative otherwise.
++ Note that assignment operators have lowest precedence. (Read Scala Language Specification 2.9 sections 6.12.3, 6.12.4 for more info)
