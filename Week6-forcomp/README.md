@@ -110,7 +110,7 @@ for {
   def prettyprint(n: Int) = {
     val numPerms = queens(n)
     numPerms.map(show).foreach(println)
-    println("\nThere are " + numPerms.size + " possible configurations with " + n + " queens.")
+    println("\nThere are " + numPerms.size + " possible configurations with " + n + " queens on a " + n + "-by-" + n + " board.")
   }
 
  }
@@ -118,4 +118,3 @@ for {
 // to run use:
 nqueens.prettyprint(8)
 ```
-
