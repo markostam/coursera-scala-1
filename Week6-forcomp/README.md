@@ -26,8 +26,8 @@
 + Common base class of ```List``` and ```Vector``` is ```Seq```, the class of all Sequences
 + ```Seq``` itself is a sublclass of ```Iterable```
 + ```Array``` and ```String``` can also implicitly be converted to a ```Seq```
-+ immutable collection heirarcy:
-![](http://docs.scala-lang.org/resources/images/collections.immutable.png)
++ scala immutable collection heirarcy:
+![scala immutable collection heirarcy](http://docs.scala-lang.org/resources/images/collections.immutable.png)
 
 ### Ranges
 
