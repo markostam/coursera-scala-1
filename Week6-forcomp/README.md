@@ -118,3 +118,11 @@ for {
 // to run use:
 nqueens.prettyprint(8)
 ```
+
+## Maps
+
++ key-value store data structurs. like a ```dict``` in python.
++ e.g. ```val romanNumerals = Map("I" -> 1, "V" -> 5, "X" -> 10)```
+  + type: ```Map[Key, Value]```
+  + Maps are Iterables but also functions
+  
