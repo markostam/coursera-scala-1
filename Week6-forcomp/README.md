@@ -114,15 +114,40 @@ for {
 nqueens.prettyprint(8)
 ```
 
-## Sets
+## Even more collections
+
+### Sets
 
 + set ***don't keep duplicates***, and they are ***unordered***
 + can use most sequence operations like ```map``` and ```filter```
 
-## Maps
+### Maps
 
 + key-value store data structurs. like a ```dict``` in python.
 + e.g. ```val romanNumerals = Map("I" -> 1, "V" -> 5, "X" -> 10)```
   + type: ```Map[Key, Value]```
   + Maps are Iterables but also functions
   
+### Option type
+
++ defined as: 
+
+```scala 
+
+trait Option[+A]
+case class Some[+A](value: A) extends Option[A]
+object None extends Option[Nothing]
+
+```
+
++ the expression ```map get key``` returns
+  + ```None``` if map does not contain the key k
+  + ```Some(v)``` if it contains value v associated with key k
+
+### Sorted and GroupBy
+
++ two more operations that have analogs in SQL queries.
+  + in SQL: groupBy and orderBy
++ ```groupBy```: partitions a collection into a map pointing to the value based on the parameter
++ ```sortBy```: sorts a collection based on given parameters
+  + ```sorted``` sorts list according to natural sorting
